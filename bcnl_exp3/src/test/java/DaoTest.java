@@ -4,13 +4,17 @@ import com.krowfeather.entity.Course;
 import com.krowfeather.entity.Student;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DaoTest {
 
     private StudentDao studentDao;
@@ -31,6 +35,8 @@ public class DaoTest {
         testStudent.setGender(1);
         testStudent.setAge(20);
         testStudent.setBirthday(Date.valueOf(LocalDate.of(2003, 1, 21)));
+        // 设置密码为"123456"
+        testStudent.setPassword("123456");
 
         // 创建测试用的课程对象
         testCourse = new Course();
@@ -49,6 +55,7 @@ public class DaoTest {
     }
 
     @Test
+    @Order(1)
     public void testStudentSaveAndFindById() {
         System.out.println("=== 测试保存和查找学生 ===");
         // 测试保存学生
@@ -59,6 +66,7 @@ public class DaoTest {
         System.out.println("根据ID查找学生结果: " + foundStudent.orElse(null));
     }
 
+    @Order(2)
     @Test
     public void testStudentUpdate() {
         System.out.println("=== 测试更新学生 ===");
@@ -70,6 +78,7 @@ public class DaoTest {
         System.out.println("更新后查找学生结果: " + updatedStudent.orElse(null));
     }
 
+    @Order(3)
     @Test
     public void testStudentDelete() {
         System.out.println("=== 测试删除学生 ===");
@@ -80,7 +89,7 @@ public class DaoTest {
         Optional<Student> deletedStudent = studentDao.findById(testStudent.getId());
         System.out.println("删除后查找学生结果: " + deletedStudent.orElse(null));
     }
-
+    @Order(4)
     @Test
     public void testCourseSaveAndFindById() {
         System.out.println("=== 测试保存和查找课程 ===");
@@ -92,6 +101,7 @@ public class DaoTest {
         System.out.println("根据ID查找课程结果: " + foundCourse.orElse(null));
     }
 
+    @Order(5)
     @Test
     public void testCourseUpdate() {
         System.out.println("=== 测试更新课程 ===");
@@ -105,6 +115,7 @@ public class DaoTest {
         System.out.println("更新后查找课程结果: " + updatedCourse.orElse(null));
     }
 
+    @Order(6)
     @Test
     public void testCourseDelete() {
         System.out.println("=== 测试删除课程 ===");
