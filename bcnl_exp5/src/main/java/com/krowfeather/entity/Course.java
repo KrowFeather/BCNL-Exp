@@ -22,7 +22,7 @@ public class Course {
     // 课程名称
     // 对应数据库表中的"name"列
     @Column(name = "name")
-    private String courseName;
+    private String name;
 
     // 课程学分
     // 对应数据库表中的"credit"列
