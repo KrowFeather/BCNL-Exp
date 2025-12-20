@@ -303,25 +303,5 @@ public class RegistrationDaoTest {
 
     @AfterEach
     public void tearDown() {
-        // 注意：由于测试之间需要共享数据，所以不在每个测试后清理
-        // 只在最后清理或手动清理测试数据
-        // 如果需要清理，可以取消下面的注释
-        /*
-        try {
-            registrationDao.deleteByUserId("S20221145141");
-        } catch (Exception e) {
-            // 忽略异常
-        }
-        try {
-            userDao.deleteById("S20221145141");
-        } catch (Exception e) {
-            // 忽略异常
-        }
-        try {
-            courseDao.deleteById("C002");
-        } catch (Exception e) {
-            // 忽略异常
-        }
-        */
     }
 }
