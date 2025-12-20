@@ -3,12 +3,16 @@ package com.krowfeather.controller;
 import com.krowfeather.entity.Result;
 import com.krowfeather.entity.User;
 import com.krowfeather.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Tag(name = "用户管理", description = "用户相关的API接口")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -16,9 +20,11 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    // 新增用户
+    @Operation(summary = "新增用户", description = "添加一个新的用户信息")
     @PostMapping
-    public Result addUser(@RequestBody User user) {
+    public Result addUser(
+            @Parameter(description = "用户信息")
+            @RequestBody User user) {
         try {
             userService.save(user);
             return Result.success("用户添加成功");
@@ -27,9 +33,13 @@ public class UserController {
         }
     }
 
-    // 根据ID查询学生
+    @Operation(summary = "根据ID查询用户", description = "根据用户ID查询用户详细信息")
+    @Parameters({
+            @Parameter(name = "id", description = "用户ID", required = true)
+    })
     @GetMapping("/{id}")
-    public Result getStudentById(@PathVariable String id) {
+    public Result getStudentById(
+            @PathVariable String id) {
         User user = userService.findById(id);
         if (user != null) {
             return Result.success(user);
@@ -38,16 +48,22 @@ public class UserController {
         }
     }
 
-    // 查询所有学生
+    @Operation(summary = "查询所有用户", description = "获取所有用户的列表信息")
     @GetMapping
     public Result getAllUsers() {
         List<User> users = userService.findAll();
         return Result.success(users);
     }
 
-    // 更新学生
+    @Operation(summary = "更新用户信息", description = "根据用户ID更新用户信息")
+    @Parameters({
+            @Parameter(name = "id", description = "用户ID", required = true)
+    })
     @PutMapping("/{id}")
-    public Result updateUser(@PathVariable String id, @RequestBody User user) {
+    public Result updateUser(
+            @PathVariable String id,
+            @Parameter(description = "更新后的用户信息")
+            @RequestBody User user) {
         try {
             user.setId(id);
             userService.update(user);
@@ -57,9 +73,13 @@ public class UserController {
         }
     }
 
-    // 删除学生
+    @Operation(summary = "删除用户", description = "根据用户ID删除用户信息")
+    @Parameters({
+            @Parameter(name = "id", description = "用户ID", required = true)
+    })
     @DeleteMapping("/{id}")
-    public Result deleteUser(@PathVariable String id) {
+    public Result deleteUser(
+            @PathVariable String id) {
         try {
             User user = new User();
             user.setId(id);
@@ -70,14 +90,20 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "用户注册", description = "用户注册新账号")
     @PostMapping("/register")
-    public Result register(@RequestBody User user) {
+    public Result register(
+            @Parameter(description = "注册用户信息")
+            @RequestBody User user) {
         boolean result = userService.register(user);
         return result ? Result.success("注册成功") : Result.error("500", "注册失败");
     }
 
+    @Operation(summary = "用户登录", description = "用户登录验证")
     @PostMapping("/login")
-    public Result login(@RequestBody User user) {
+    public Result login(
+            @Parameter(description = "登录用户信息")
+            @RequestBody User user) {
         boolean result = userService.login(user);
         return result ? Result.success("登录成功") : Result.error("500", "登录失败");
     }

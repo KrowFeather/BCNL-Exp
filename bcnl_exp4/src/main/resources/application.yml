@@ -16,3 +16,18 @@ spring:
 #        format_sql: true
 #        highlight_sql: true
 
+knife4j:
+  # 是否启用Knife4j功能
+  enable: true
+  # Basic认证配置
+  basic:
+    # 是否启用Basic认证
+    enable: true
+    # 认证用户名
+    username: admin
+    # 认证密码
+    password: 123456
+  # 界面设置配置
+  setting:
+    # 界面语言设置为中文
+    language: zh_cn
