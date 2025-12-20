@@ -14,10 +14,12 @@ import java.util.List;
 public interface RegistrationDao extends JpaRepository<Registration, Long> {
 
     // 自定义查询方法1：根据学生ID查找选课记录
-    List<Registration> findByUserId(String userId);
+    @Query("SELECT r FROM Registration r WHERE r.user.id = :userId")
+    List<Registration> findByUserId(@Param("userId") String userId);
 
     // 自定义查询方法2：根据课程ID查找选课记录
-    List<Registration> findByCourseId(String courseId);
+    @Query("SELECT r FROM Registration r WHERE r.course.id = :courseId")
+    List<Registration> findByCourseId(@Param("courseId") String courseId);
 
     // 自定义JPQL查询：根据用户ID和课程ID联合查询
     @Query("SELECT r FROM Registration r WHERE r.user.id = :userId AND r.course.id = :courseId")
