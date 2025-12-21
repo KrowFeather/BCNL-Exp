@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "registration")
 @Data
@@ -22,10 +20,10 @@ public class Registration {
     // 关联的学生实体
     // 多对一关系：多个选课记录对应一个学生
     // 使用延迟加载优化性能
-    // 通过"sid"外键列关联Student表
+    // 通过"uid"外键列关联User表
     @ManyToOne(fetch = FetchType.LAZY)  // 定义多对一关系，使用延迟加载
-    @JoinColumn(name = "sid", nullable = false)  // 指定外键列名为"sid"，不允许为空
-    private Student student;
+    @JoinColumn(name = "uid", nullable = false)  // 指定外键列名为"uid"，不允许为空
+    private User user;
 
     // 关联的课程实体
     // 多对一关系：多个选课记录对应一门课程

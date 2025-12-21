@@ -4,15 +4,26 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/bcnl5?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false
+    url: jdbc:mysql://localhost:3306/bcnl4?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
-        highlight_sql: true
+  jackson:
+    serialization:
+          fail-on-empty-beans: false
+#        format_sql: true
+#        highlight_sql: true
 
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: admin
+    password: 123456
+  setting:
+    language: zh_cn
