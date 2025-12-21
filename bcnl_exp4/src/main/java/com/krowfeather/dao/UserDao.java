@@ -29,10 +29,4 @@ public interface UserDao extends JpaRepository<User, String> {
     @Transactional
     @Query("UPDATE User u SET u.role = :role WHERE u.id = :id")
     int updateUserRole(@Param("id") String id, @Param("role") Integer role);
-
-    // 自定义删除操作：根据角色删除用户
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM User u WHERE u.role = :role")
-    int deleteUsersByRole(@Param("role") Integer role);
 }

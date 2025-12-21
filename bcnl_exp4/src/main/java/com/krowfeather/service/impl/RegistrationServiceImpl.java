@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 选课服务实现类
+ * 实现选课相关的业务逻辑
+ */
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
@@ -40,5 +44,25 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public void delete(Registration registration) {
         registrationDao.delete(registration);
+    }
+
+    @Override
+    public List<Registration> findByUserId(String userId) {
+        return registrationDao.findByUserId(userId);
+    }
+
+    @Override
+    public List<Registration> findByCourseId(String courseId) {
+        return registrationDao.findByCourseId(courseId);
+    }
+
+    @Override
+    public int deleteByUserId(String userId) {
+        return registrationDao.deleteByUserId(userId);
+    }
+
+    @Override
+    public int countByCourseId(String courseId) {
+        return registrationDao.countByCourseId(courseId);
     }
 }

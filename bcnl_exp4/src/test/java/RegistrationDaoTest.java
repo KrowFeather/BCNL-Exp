@@ -171,36 +171,6 @@ public class RegistrationDaoTest {
     @Test
     @Order(6)
     @Transactional
-    public void testFindByUserIdAndCourseId() {
-        System.out.println("=== 测试根据用户ID和课程ID联合查询 ===");
-        // 确保有选课记录存在
-        List<Registration> existing = registrationDao.findByUserIdAndCourseId("S20221145141", "C002");
-        if (existing.isEmpty()) {
-            // 如果没有记录，先创建一条
-            Registration newReg = new Registration();
-            newReg.setUser(testUser);
-            newReg.setCourse(testCourse);
-            registrationDao.save(newReg);
-            System.out.println("创建测试选课记录");
-        }
-        
-        List<Registration> registrations = registrationDao.findByUserIdAndCourseId("S20221145141", "C002");
-        System.out.println("根据用户ID和课程ID查找结果: " + registrations.size() + " 条记录");
-        if (registrations.isEmpty()) {
-            System.out.println("未找到匹配的选课记录");
-        } else {
-            for (Registration registration : registrations) {
-                // 在事务中访问懒加载属性
-                System.out.println("ID=" + registration.getId() + 
-                                 ", 用户=" + registration.getUser().getName() + 
-                                 ", 课程=" + registration.getCourse().getName());
-            }
-        }
-    }
-
-    @Test
-    @Order(7)
-    @Transactional
     public void testCountByCourseId() {
         System.out.println("=== 测试统计课程选课人数 ===");
         // 确保有选课记录存在
@@ -219,7 +189,7 @@ public class RegistrationDaoTest {
     }
 
     @Test
-    @Order(8)
+    @Order(9)
     @Transactional
     public void testUpdateRegistration() {
         System.out.println("=== 测试更新选课记录 ===");
@@ -250,7 +220,7 @@ public class RegistrationDaoTest {
     }
 
     @Test
-    @Order(9)
+    @Order(7)
     public void testDeleteByUserId() {
         System.out.println("=== 测试根据用户ID删除选课记录 ===");
         // 先确保有选课记录存在（重新创建一条，因为前面的测试可能已经删除）
@@ -277,7 +247,7 @@ public class RegistrationDaoTest {
     }
 
     @Test
-    @Order(10)
+    @Order(8)
     @Transactional
     public void testDeleteRegistration() {
         System.out.println("=== 测试删除选课记录 ===");

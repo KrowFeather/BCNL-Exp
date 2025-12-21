@@ -21,10 +21,6 @@ public interface RegistrationDao extends JpaRepository<Registration, Long> {
     @Query("SELECT r FROM Registration r WHERE r.course.id = :courseId")
     List<Registration> findByCourseId(@Param("courseId") String courseId);
 
-    // 自定义JPQL查询：根据用户ID和课程ID联合查询
-    @Query("SELECT r FROM Registration r WHERE r.user.id = :userId AND r.course.id = :courseId")
-    List<Registration> findByUserIdAndCourseId(@Param("userId") String userId, @Param("courseId") String courseId);
-
     // 自定义删除操作：根据用户ID删除选课记录
     @Modifying
     @Transactional

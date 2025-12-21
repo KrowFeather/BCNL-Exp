@@ -126,31 +126,6 @@ public class UserDaoTest {
 
     @Test
     @Order(9)
-    public void testDeleteUsersByRole() {
-        System.out.println("=== 测试根据角色删除用户 ===");
-        // 先创建一个特定角色的用户用于测试删除
-        User testRoleUser = new User();
-        testRoleUser.setId("U002");
-        testRoleUser.setName("测试用户");
-        testRoleUser.setGender(0);
-        testRoleUser.setPassword("123456");
-        testRoleUser.setRole(99);
-        userDao.save(testRoleUser);
-        System.out.println("创建测试用户: " + testRoleUser);
-
-        int result = userDao.deleteUsersByRole(99);
-        System.out.println("根据角色删除用户成功，影响行数: " + result);
-
-        Optional<User> deletedUser = userDao.findById("U002");
-        if (deletedUser.isPresent()) {
-            System.out.println("用户仍存在: " + deletedUser.get());
-        } else {
-            System.out.println("用户已删除");
-        }
-    }
-
-    @Test
-    @Order(10)
     public void testDeleteUser() {
         System.out.println("=== 测试删除用户 ===");
         userDao.deleteById("U001");

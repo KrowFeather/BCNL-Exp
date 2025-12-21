@@ -30,9 +30,5 @@ public interface CourseDao extends JpaRepository<Course, String> {
     @Transactional
     @Query("UPDATE Course c SET c.credit = :credit WHERE c.id = :id")
     int updateCourseCredit(@Param("id") String id, @Param("credit") Float credit);
-
-    // 自定义统计查询：计算平均学分
-    @Query("SELECT AVG(c.credit) FROM Course c")
-    Float calculateAverageCredit();
 }
 

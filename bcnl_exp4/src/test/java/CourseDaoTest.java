@@ -122,14 +122,6 @@ public class CourseDaoTest {
 
     @Test
     @Order(9)
-    public void testCalculateAverageCredit() {
-        System.out.println("=== 测试计算平均学分 ===");
-        Float avgCredit = courseDao.calculateAverageCredit();
-        System.out.println("平均学分: " + avgCredit);
-    }
-
-    @Test
-    @Order(10)
     public void testDeleteCourse() {
         System.out.println("=== 测试删除课程 ===");
         courseDao.deleteById("C001");
