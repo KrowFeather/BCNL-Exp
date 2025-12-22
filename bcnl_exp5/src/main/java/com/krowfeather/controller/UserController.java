@@ -78,6 +78,12 @@ public class UserController {
             @Parameter(description = "更新后的用户信息") @RequestBody User user) {
         try {
             user.setId(id);
+            User oldUser = userService.findById(id);
+            if (oldUser == null) {
+                return Result.error("404", "用户不存在");
+            }else{
+                user.setPassword(oldUser.getPassword());
+            }
             userService.update(user);
             return Result.success("用户更新成功");
         } catch (Exception e) {
@@ -120,8 +126,12 @@ public class UserController {
     @Operation(summary = "用户登录", description = "用户登录验证")
     @PostMapping("/login")
     public Result login(@Parameter(description = "登录用户信息") @RequestBody User user) {
-        boolean result = userService.login(user);
-        return result ? Result.success("登录成功") : Result.error("500", "登录失败");
+        try {
+            boolean result = userService.login(user);
+            return result ? Result.success("登录成功") : Result.error("500", "登录失败");
+        } catch (Exception e) {
+            return Result.error("500", "登录失败: " + e.getMessage());
+        }
     }
 
     /**

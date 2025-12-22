@@ -12,12 +12,12 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        highlight_sql: true
   jackson:
     serialization:
           fail-on-empty-beans: false
-#        format_sql: true
-#        highlight_sql: true
 
 knife4j:
   enable: true
